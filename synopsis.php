@@ -42,11 +42,13 @@
                         $q = $conn->prepare($get);
                         $q->execute();
                         $ids = $q->fetchAll();
-						$temp = array_shift($ids);
+                        print_r($ids);
+			$temp = array_shift($ids);
                         $i = array_shift($temp);
                         foreach($e as $key => $value){
                             $ent = "INSERT INTO ".Synopsis::$tbname2." (ID, Time, Text) VALUES ($i, $key, '$value')";
                             $y = $conn->prepare($ent);
+                            print_r($y->errorInfo());
                             $y->execute();
                         }
 			return new Synopsis($i, $n, $a, $s, 0, 0, $eT, $e);
