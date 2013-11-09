@@ -1,26 +1,29 @@
 <html>
 <?php
 	class Synopsis {
-                private static $dbtype = "mysql";
-                private static $dbhost = "localhost";
-                private static $dbname = "yhacks";
-                private static $dbuser = "root";
-                private static $tbname = "synopsis";
-                private static $tbname2 = "entry";
+		private static $dbtype = "mysql";
+		private static $dbhost = "localhost";
+		private static $dbname = "yhacks";
+		private static $dbuser = "root";
+		private static $tbname = "synopsis";
+		private static $tbname2 = "entry";
+
 		private $id; // the synopsis id
 		private $name; // the movie name
 		private $author; // the author of the synopsis
+		private $start; // the time the movies synopsis starts
 		private $upvotes; // the number of upvotes
 		private $downvotes; // the number of downvotes
 		private $entryTimes; // the list of times in order
 		private $entries; // the entries
 		
 		// the constructor
-		private function __construct($i, $n, $a, $u, $d, $eT, $e) {
+		private function __construct($i, $n, $a, $s, $u, $d, $eT, $e) {
 			
 			$this -> id = $i;
 			$this -> name = $n;
 			$this -> author = $a;
+			$this -> start = $s;
 			$this -> upvotes = $u;
 			$this -> downvotes = $d;
 			$this -> entryTimes = $eT;
@@ -28,11 +31,11 @@
 		}// __construct
 		
 		//returns a new synopsis
-		public static function createNew($n, $a, $eT, $e){
+		public static function createNew($n, $a, $s, $eT, $e){
                         
                         $conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
 
-                        $insert = "INSERT INTO ".Synopsis::$tbname." (MovieName, Author, Upvotes, Downvotes) VALUES ('$n', '$a', 0, 0)";
+                        $insert = "INSERT INTO ".Synopsis::$tbname." (MovieName, Author, Start, Upvotes, Downvotes) VALUES ('$n', '$a', $s, 0, 0)";
                         $x = $conn->prepare($insert);
                         $x->execute();
                         $get = "SELECT ID FROM ".Synopsis::$tbname." ORDER BY ID DESC";
@@ -46,24 +49,26 @@
                             $y = $conn->prepare($ent);
                             $y->execute();
                         }
-			return new Synopsis($i, $n, $a, 0, 0, $eT, $e);
+			return new Synopsis($i, $n, $a, $s, 0, 0, $eT, $e);
 		}// createNew
 		
 		//returns the synopsis with id $i
 		public static function retreive($i){
 		
 			$conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
-			$insert = "SELECT * FROM ".Synopsis::$tbname." WHERE ID = ".$i;
+			$insert = "SELECT * FROM ".Synopsis::$tbname." WHERE ID = $i";
 			$x = $conn->prepare($insert);
 			$x->execute();
 			$data = $x -> fetchAll();
 			
 			$data = array_shift($data);
+			
 			$i = $data[0];
 			$n = $data[1];
 			$a = $data[2];
-			$u = $data[3];
-			$d = $data[4];
+			$s = $data[3];
+			$u = $data[4];
+			$d = $data[5];
 			
 			$insert = "SELECT * FROM ".Synopsis::$tbname2." WHERE ID = ".$i;
 			$x = $conn->prepare($insert);
@@ -80,7 +85,7 @@
 			
 			array_values($eT);
 			
-			return new Synopsis($i, $n, $a, $u, $d, $eT, $e);
+			return new Synopsis($i, $n, $a, $s, $u, $d, $eT, $e);
 		}// retrieve
 		
 		// returns a list of synopsii with the name passed in
@@ -116,6 +121,12 @@
 		
 			return $this -> author;
 		}// getAuthor
+		
+		// returns the start time of the synopsis
+		public function getStart(){
+		
+			return $this -> start;
+		}//getStart
 		
 		// returns the number of upvotes
 		public function getUpvotes() {
@@ -185,13 +196,13 @@
 	
 	// $entryT = array(1, 15, 52);
 	// $entries = array(1 => "test", 15 => "Hello", 52 => "the thing");
-	// $test = Synopsis::createNew("Finding Nemo", "Ram", $entryT, $entries);
+	// $test = Synopsis::createNew("Finding Nemo", "Wasson", 40, $entryT, $entries);
         // $test -> addUpvote();
-		// $test -> addDownvote();
-		// $test -> addDownvote();
-		// $test -> addDownvote();
-		// $test -> addDownvote();
-		// $test -> addDownvote();
+		// $test -> addUpvote();
+		// $test -> addUpvote();
+		// $test -> addUpvote();
+		// $test -> addUpvote();
+		// $test -> addUpvote();
 		// $test -> addUpvote();
         // $test -> addDownvote();
 ?>
