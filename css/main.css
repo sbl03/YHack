@@ -4,11 +4,18 @@
 .fit-to-container {
 	max-width: 62.5em;
 }
+.rounded {
+	border-radius: 5px;
+	-moz-border-radius: 5px;
+	-o-border-radius: 5px;
+	-webkit-border-radius: 5px;	
+}
 
+/* MAIN PAGE */
 #hero-unit {
 	text-align: center;	
 }
-	#hero-unit form {	
+	#hero-unit form {
 	}
 		#hero-unit form input {
 			width: 500px;
@@ -18,3 +25,36 @@
 		#hero-unit form * {
 			display: inline-block;	
 		}
+
+/* SEARCH RESULTS PAGE */
+#top-search {
+	
+}
+	#top-search form { }
+		#top-search form * {
+			display: inline-block;	
+		}
+		#top-search input {
+			width: 500px;
+			max-width: 100%;	
+		}
+		
+.result {}
+	.result .result-table {
+			
+	}
+		.result-table td:last-child {
+			width: 100%;	
+		}
+		
+/* SYNOPSIS PAGE */
+
+/* INPUT PAGE */
+#syn-form { }
+	#syn-form #movie-title {
+		width: 400px;
+		max-width: 100%;
+	}
+	#syn-form #movie-start {
+		width: 100px;	
+	}
