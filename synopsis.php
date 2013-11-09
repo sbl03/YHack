@@ -85,7 +85,7 @@
 				$e[$value[1]] = $value[2];
 			}// foreach
 			
-			array_values($eT);
+			sort($eT);
 			
 			return new Synopsis($i, $n, $a, $s, $u, $d, $eT, $e);
 		}// retrieve
@@ -194,7 +194,7 @@
 		function addEntry($val) { 
 			array_push($entryTimes, $val[0]);
 			$entries[$val[0]] = $val[1];
-			$entryTimes = array_values($entryTimes);
+			sort($entryTimes);
 		}// addEntry
 	
 		// removes and entry to the synopsis
@@ -210,7 +210,7 @@
 					if($key == $val[0]) unset($entries[$key]);
 				}// foreach
 					
-				$entryTimes = array_values($entryTimes);					
+				sort($entryTimes);					
 			}// if
 		}// removeEntry
 	}// class Synopsis

@@ -88,8 +88,8 @@ $obj = get_object_vars(json_decode($json));
 									
 									console.log(hours);
 									
-									$( "#plot-info" ).append("<div class=\"plot_time\">" + hours + ":" + min + ":" + sec + "</div>").hide().fadeIn();
-									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>").hide().fadeIn();
+									$( "#plot-info" ).append("<div class=\"plot_time\">" + hours + ":" + min + ":" + sec + "</div>");
+									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>");
 									
 									synCounter++;
 									
