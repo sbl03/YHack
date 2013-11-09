@@ -1,0 +1,20 @@
+.full {
+	width: 100%;	
+}
+.fit-to-container {
+	max-width: 62.5em;
+}
+
+#hero-unit {
+	text-align: center;	
+}
+	#hero-unit form {	
+	}
+		#hero-unit form input {
+			width: 500px;
+			max-width: 100%;
+			
+		}
+		#hero-unit form * {
+			display: inline-block;	
+		}

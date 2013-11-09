@@ -5,10 +5,11 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width">
-	<title>Foundation 4</title>
+	<title>PlotPal</title>
 	
 	
 	<link rel="stylesheet" href="css/foundation.css">
+	<link rel="stylesheet" href="css/main.css">
 	
 	<script src="js/vender/jquery.js"></script>
 	<script src="js/vendor/custom.modernizr.js"></script>
@@ -19,7 +20,7 @@
 <nav class="top-bar">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#">Title</a></h1>
+			<h1><a href="#">PlotPal</a></h1>
 		</li>
 	</ul>
 	
