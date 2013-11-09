@@ -7,6 +7,12 @@
 
 </footer>
 
+<div id="success-modal" class="reveal-modal">
+  <h2>Added synopsis successfully!</h2>
+  <p><a id="success-modal-link" href="">View your submission here</a></p>
+  <a class="close-reveal-modal">&#215;</a>
+</div>
+
 <script src="js/foundation.min.js"></script>
 <script>
 	$(document).foundation();

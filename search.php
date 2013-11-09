@@ -18,28 +18,31 @@ foreach($obj as $o) {
 		$json2 = file_get_contents('http://www.omdbapi.com/?i=' . $o['imdbID']);
 		$obj2 = get_object_vars(json_decode($json2));
 		
-		$toAdd .= '<div class="movie-block">' .
-						'<a href="search.php?name='. $obj2['Title'] .'"><img src="'. $obj2['Poster'] .'" /></a>' .
-						//'<span class="movie-title">'. $obj2['Title'] .'</span>' .
-					'</div>';
+		$toAdd .= '<div class="movie-block text-center"><span data-tooltip class="has-tip" title="'.$obj2['Title'].'"><a href="search.php?name='. $obj2['Title'] .'">';
+		$toAdd .= '<img alt="'. $obj2['Title'] .'" title="'. $obj2['Title'] .'" src="'. $obj2['Poster'] .'" /></a>';
+		$toAdd .= '</span></div>';
 	}
 	$i++;
 }
 ?>
 
 <div class="row full small-hero">
-	<div class="small-12 columns">
-		<div id="top-search">
-			<input type="text" class="movie-textbox" placeholder="Search again" />
-			<a id="search-button" class="small button">Submit</a>
+	<div class="fit-to-container">
+		<div class="small-12 columns">
+			<div id="top-search">
+				<input type="text" class="movie-textbox" placeholder="Search again" />
+				<a id="search-button" class="small button">Submit</a>
+			</div>
 		</div>
 	</div>
 </div>
-<div class="row full orange">
-	<div class="small-12 columns">
-		<div id="suggested-movies">
-			<h2>Suggested Movies</h2>
-			<?php echo $toAdd ?>
+<div class="row full orange" id="suggested-movies-container">
+	<div class="fit-to-container">
+		<div class="small-12 columns">
+			<div id="suggested-movies">
+				<h2>Suggested Movies</h2>
+				<?php echo $toAdd ?>
+			</div>
 		</div>
 	</div>
 </div>
@@ -48,9 +51,14 @@ foreach($obj as $o) {
 		<div id="results-container">
 			<h2>All Results for <span id="query"><?php echo $name ?></span></h2>
 			<div class="result">
-				<table class="result-table">
-					<?php				
-						$synopsii = Synopsis::search($name);
+				<?php				
+					$synopsii = Synopsis::search($name);
+					
+					if(empty($synopsii)) {
+						echo '<p class="no-results">There are no synopses for this movie! <a href="input.php">Create one?</a></p>';
+					}
+					else {
+						echo '<table class="result-table">';
 						foreach ($synopsii as $key => $value){
 			
 							echo "<tr data-id=\"".($value -> getID())."\">
@@ -62,12 +70,14 @@ foreach($obj as $o) {
 									<div class=\"rating\">".($value -> getUpvotes() - $value -> getDownvotes())."</div>
 								</td>
 								<td>
-									<h3>".$value -> getName()."</h3> by ".$value -> getAuthor()."
+									<h3><a href=\"syn.php?id=". ($value -> getID()) ."\">".$value -> getName()."</a></h3> by ".$value -> getAuthor()."
 								</td>
 						</tr>";					
 						}// foreach
-					?>
-				</table>
+						
+						echo '</table>';
+					}
+				?>
 			</div>
 		</div>
 	</div>
@@ -92,26 +102,26 @@ $(document).ready(function() {
 		window.location = 'search.php?name=' + $('.movie-textbox').val();
 	});
 	
-	$('.upvotes').click(function() {
+	$('.upvote').click(function() {
 		var parent = $(this).parents('tr');
 		
 		$.ajax({
 			type: "POST",
 			url: "php/update-vote.php",
-			data: "vote=up&id=" + $(parent).attr('data-id'),
+			data: "vote=1&id=" + $(parent).attr('data-id'),
 			success: function(data) {
 				$(parent).find('.rating').html(data);
 			}
 		});
 	});
 	
-	$('.downvotes').click(function() {
+	$('.downvote').click(function() {
 		var parent = $(this).parents('tr');
 		
 		$.ajax({
 			type: "POST",
 			url: "php/update-vote.php",
-			data: "vote=down&id=" + $(parent).attr('data-id'),
+			data: "vote=0&id=" + $(parent).attr('data-id'),
 			success: function(data) {
 				$(parent).find('.rating').html(data);
 			}

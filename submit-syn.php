@@ -19,4 +19,6 @@
 	}// while
 	
 	$new = Synopsis::createNew($name, $author, $time, $entryTimes, $entries);
+	
+	echo json_encode(array($new->getID()));
 ?>

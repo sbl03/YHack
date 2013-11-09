@@ -1,4 +1,7 @@
-<?php include "header.php" ?>
+<?php include "header.php";
+if(!isset($_SESSION['user']))
+	header("Location: index.php");
+?>
 
 <div class="row full">
 	<div class="fit-to-container">
@@ -11,7 +14,7 @@
 							<label class="right inline" for="movie-title">Movie Title</label>
 						</div>
 						<div class="small-9 columns">
-							<input id="movie-title" type="text" name="movie-title" />
+							<input id="movie-title" type="text" name="movie-title" class="movie-textbox" maxlength="50" />
 						</div>
 					</div>
 					<div class="row">
@@ -19,7 +22,7 @@
 							<label class="right inline" for="movie-start"><span data-tooltip class="has-tip" title="Enter the time the movie starts so we know how much to offset your timestamps">Movie Start Time</span></label>
 						</div>
 						<div class="small-9 columns">
-							<input id="movie-start" type="text" name="movie-start" placeholder="MM:SS" />
+							<input id="movie-start" type="text" name="movie-start" placeholder="MM:SS" maxlength="5" />
 						</div>
 					</div>
 				</div>
@@ -34,16 +37,16 @@
 					</div>
 					<div class="row">
 						<div class="small-3 columns">
-							<input class="plot-time" name="plot-time-1" type="text" placeholder="HH:MM:SS" />
+							<input class="plot-time" name="plot-time-1" type="text" placeholder="HH:MM:SS" maxlength="8"  />
 						</div>
 						<div class="small-9 columns">
-							<textarea class="plot-summary" name="plot-summary-1" rows="4"></textarea>
+							<textarea class="plot-summary" name="plot-summary-1" rows="4" maxlength="600" ></textarea>
 						</div>
 					</div>
 					<div class="row add-row">
 						<div class="small-12 columns text-center">
 							<a class="small button add-entry">+ Add Another</a>
-							<a class="small button submit-synopsis">Submit</a>
+							<a class="small button submit-synopsis" data-reveal-id="success-modal">Submit</a>
 						</div>
 					</div>
 				</div>
@@ -73,7 +76,16 @@ $(document).ready(function() {
 	$('.submit-synopsis').click(function(e) {
 		e.preventDefault();
 		
-		$('#syn-form').submit();
+		$.ajax({
+			type: "POST",
+			url: "submit-syn.php",
+			data: $('#syn-form').serialize(),
+			success: function(data) {
+				var ret = $.parseJSON(data);
+				console.log(ret);
+				$('#success-modal-link').attr('href', 'syn.php?id=' + ret);
+			}			
+		});
 	});
 });
 </script>

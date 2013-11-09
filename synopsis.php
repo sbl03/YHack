@@ -1,4 +1,3 @@
-<html>
 <?php
 	class Synopsis {
 		private static $dbtype = "mysql";
@@ -42,13 +41,11 @@
                         $q = $conn->prepare($get);
                         $q->execute();
                         $ids = $q->fetchAll();
-                        print_r($ids);
 			$temp = array_shift($ids);
                         $i = array_shift($temp);
                         foreach($e as $key => $value){
                             $ent = "INSERT INTO ".Synopsis::$tbname2." (ID, Time, Text) VALUES ($i, $key, '$value')";
                             $y = $conn->prepare($ent);
-                            print_r($y->errorInfo());
                             $y->execute();
                         }
 			return new Synopsis($i, $n, $a, $s, 0, 0, $eT, $e);
@@ -181,7 +178,7 @@
 		
 			$syn = Synopsis::retreive($id);
 			
-			if ($type == 0){
+			if ($type == 1){
 				$syn -> addUpvote();
 				}
 			else{			
@@ -230,4 +227,3 @@
 	// Synopsis::vote(23, 0);
 	// Synopsis::vote(22, 1);
 ?>
-</html>

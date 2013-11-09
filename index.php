@@ -1,5 +1,14 @@
 <?php include "header.php" ?>
 
+<style>
+	.ui-autocomplete {
+		background-color: transparent !important;	
+	}
+	.ui-autocomplete a {
+		color: #fff !important;	
+	}
+</style>
+
 <div class="row full" id="hero-container">
 	<div class="fit-to-container">
 		<div class="small-12 columns">
@@ -17,7 +26,7 @@
 		</div>
 	</div>
 </div>
-<div class="row full" id="about-container">
+<div class="row full orange" id="about-container">
 	<div class="fit-to-container">
 		<div class="small-12 columns">
 			<p class="serif">Confused by the movie you're watching? Scared of having critical plot points ruined? You’ve come to the right place. With the PlotPal movie companion get in depth explanation of plot points as they happen, in sync with the movie. By keeping track of where you are in the film, PlotPal ensures to never reveal too much. </p>

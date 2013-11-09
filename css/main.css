@@ -3,6 +3,9 @@
 
 /* TAGS */
 
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}
+
 textarea {
 	resize: vertical;	
 }
@@ -45,17 +48,27 @@ hr {
 	-webkit-border-radius: 5px !important;
 }
 .ui-helper-hidden-accessible {
-	display: none;	
+	display: none !important;	
 }
 .ui-autocomplete {
-	list-style: none;	
+	list-style: none;
+	max-width: 400px;
+	background-color: #fff;
 }
 	.ui-autocomplete li {
 		
 	}
 		.ui-autocomplete li a {
-			color: #fff;	
+			color: #333;	
 		}
+		
+.preloader {
+	width: 96px;
+	height: 96px;
+	background-image: url(../spinner_96.gif);	
+	background-repeat: no-repeat;
+	background-position: center center;
+}
 
 /* MAIN PAGE */
 #hero-container {
@@ -110,11 +123,26 @@ hr {
 	}
 	#top-search input {
 		width: 500px;
-		max-width: 100%;	
+		max-width: 100%;
 	}
 	#top-search #search-button {
 		width: auto;	
 	}
+	
+#suggested-movies-container {
+	max-height: 200px;
+	overflow: hidden;
+	transition: all 0.5s ease;
+	-moz-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	box-shadow: 0 -15px 15px -5px rgba(0, 0, 0, 0.2) inset;
+	-moz-box-shadow: 0 -15px 15px -5px rgba(0, 0, 0, 0.2) inset;
+	-webkit-box-shadow: 0 -15px 15px -5px rgba(0, 0, 0, 0.2) inset;
+}
+#suggested-movies-container:hover {
+	max-height: 400px;	
+}
 	
 #suggested-movies {
 	
@@ -134,6 +162,17 @@ hr {
 		.result-table td:last-child {
 			width: 100%;	
 		}
+
+.no-results {
+	color: #aaa;
+	font-size: 1.3em;	
+}
+
+.upvote,
+.downvote {
+	font-size: 1.3em;
+	cursor: pointer;	
+}
 		
 /* SYNOPSIS PAGE */
 #movie-info {
@@ -142,6 +181,32 @@ hr {
 }
 	#movie-info td {
 		vertical-align: top;	
+	}
+	
+#controls {
+	bottom: 0;
+    position: fixed;
+    right: 0;
+}
+	#controls button {
+		background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+		border: medium none;
+		color: #000;
+		font-size: 5em;
+		margin: 0;
+		padding: 0;
+		z-index: 999;
+		opacity: 0.2;
+		transition: opacity 0.25s linear;
+		-moz-transition: opacity 0.25s linear;
+		-webkit-transition: opacity 0.25s linear;
+		-o-transition: opacity 0.25s linear;
+	}
+		#controls button:hover {
+			opacity: 0.5;	
+		}
+	#controls #pause {
+		display: none;	
 	}
 
 /* INPUT PAGE */

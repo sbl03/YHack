@@ -92,7 +92,7 @@ $obj = get_object_vars(json_decode($json));
 									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>");
 									
 									synCounter++;
-									
+									$("html, body").animate({scrollTop: $(document).height()}, 1500);
 									if(synCounter >= entries.length)
 										window.clearInterval(test);
 								}//if
@@ -112,39 +112,22 @@ $obj = get_object_vars(json_decode($json));
 						</script>
 					';
 				?>
-				
-				<button onclick="resume()">Play</button>
-				<button onclick="pause()">Pause</button>
 			</div>
 		</div>
 	</div>
 </div>
 
+<div id="controls">
+	<button id="play" onclick="resume()">► Play</button>
+	<button id="pause" onclick="pause()"><strong>||</strong> Pause</button>
+</div>
 
+<script>
+	$(document).ready(function() {
+		$('#controls button').click(function() {
+			$('#controls button').toggle();
+		});
+	});
+</script>
 
 <?php include "footer.php" ?>
-
-
-
-// <script>
-	// //$(document).ready(function() {
-
-		// console.log("Working");
-		// var synCounter = 0;
-		// var time = 0;
-		// var isPaused = false;
-		 
-		// <?php
-		
-			// $et = $obj -> getETimes();
-			// $e = $obj -> getEntries();
-			
-			// echo "var entries = new Array();";
-			
-			// foreach ($et as $key => $value){
-			
-				// echo "entries[".$key."] = [".$value.", ".$e[$value]."];";
-			// }// foreach
-		// ?>
-	// //});
-// </script>

@@ -1,0 +1,15 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+#if looping, cancel (not preferred way)
+RewriteCond %{ENV:REDIRECT_STATUS} 200
+RewriteRule ^ - [L]
+
+#remove trailing slash
+RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+#remove .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [L]
