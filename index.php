@@ -1,6 +1,6 @@
 <?php include "header.php" ?>
 
-<div class="row full">
+<div class="row full" id="hero-container">
 	<div class="fit-to-container">
 		<div class="small-12 columns">
 			<div id="hero-unit">
