@@ -24,14 +24,14 @@ session_start();
 <nav class="top-bar">
 	<ul class="title-area">
 		<li class="name">
-			<h1><a href="#">PlotPal</a></h1>
+			<h1><a href="index.php">PlotPal</a></h1>
 		</li>
 	</ul>
 	
 	<section class="top-bar-section">
 		<ul class="right">
 			<?php if(isset($_SESSION['user'])) { ?>
-				<li><a href="#">Submit Synopsis</a></li>
+				<li><a href="input.php">Submit Synopsis</a></li>
 				<li><a id="logout" class="small button">Logout</a></li>
 			<?php } ?>
 			<?php if(!isset($_SESSION['user'])) { ?>

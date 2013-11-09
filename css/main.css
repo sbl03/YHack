@@ -1,3 +1,25 @@
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
+
+/* TAGS */
+
+textarea {
+	resize: vertical;	
+}
+h1,
+h2,
+h3 {
+	font-family: "Roboto", sans-serif;	
+}
+
+/* CLASSES */
+
+* {
+	-moz-transition: background-color 0.5s linear;
+    -webkit-transition: background-color 0.5s linear;
+    -o-transition: background-color 0.5s linear;
+    transition: background-color 0.5s linear;
+}
+
 .full {
 	width: 100%;
 	max-width: 100%;
@@ -11,7 +33,7 @@
 	border-radius: 5px !important;
 	-moz-border-radius: 5px !important;
 	-o-border-radius: 5px !important;
-	-webkit-border-radius: 5px !important;	
+	-webkit-border-radius: 5px !important;
 }
 
 /* MAIN PAGE */
@@ -19,6 +41,11 @@
 	background-image: url(../img/hero.jpg);
 	background-size: cover;
 	background-position: center center;	
+}
+#about-container {
+	background-color: #FC0;
+	padding-top: 30px;	
+	padding-bottom: 30px;
 }
 #hero-unit {
 	text-align: center;	
@@ -34,6 +61,10 @@
 			max-width: 100%;
 			font-size: 2em;
 			opacity: 0.2;
+			transition: opacity 0.25s ease-in-out;
+		}
+		#hero-unit form input:hover {
+			opacity: 1;	
 		}
 		#hero-unit form * {
 			display: inline-block;	
@@ -63,6 +94,9 @@
 /* SYNOPSIS PAGE */
 
 /* INPUT PAGE */
+#plot-container {
+	margin-top: 20px;
+}
 #syn-form { }
 	#syn-form #movie-title {
 		width: 400px;
@@ -71,3 +105,14 @@
 	#syn-form #movie-start {
 		width: 100px;	
 	}
+	#syn-form #movie-container {
+		background-color: #f3f3f3;
+		padding-top: 14px;
+	}
+	
+/* FOOTER */
+#footer {
+	border-top: 1px solid #eee;
+	font-size: 90%;
+	padding-top: 10px;
+}

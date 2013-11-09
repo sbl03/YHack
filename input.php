@@ -5,20 +5,22 @@
 		<div class="small-12 columns">
 			<h1>Submit a Synopsis</h1>
 			<form id="syn-form" action="submit-syn.php" method="post">
-				<div class="row">
-					<div class="small-3 columns">
-						<label class="right inline" for="movie-title">Movie Title</label>
+				<div id="movie-container">
+					<div class="row">
+						<div class="small-3 columns">
+							<label class="right inline" for="movie-title">Movie Title</label>
+						</div>
+						<div class="small-9 columns">
+							<input id="movie-title" type="text" />
+						</div>
 					</div>
-					<div class="small-9 columns">
-						<input id="movie-title" type="text" />
-					</div>
-				</div>
-				<div class="row">
-					<div class="small-3 columns">
-						<label class="right inline" for="movie-start"><span data-tooltip class="has-tip" title="Enter the time the movie starts so we know how much to offset your timestamps">Movie Start Time</span></label>
-					</div>
-					<div class="small-9 columns">
-						<input id="movie-start" type="text" placeholder="MM:SS" />
+					<div class="row">
+						<div class="small-3 columns">
+							<label class="right inline" for="movie-start"><span data-tooltip class="has-tip" title="Enter the time the movie starts so we know how much to offset your timestamps">Movie Start Time</span></label>
+						</div>
+						<div class="small-9 columns">
+							<input id="movie-start" type="text" placeholder="MM:SS" />
+						</div>
 					</div>
 				</div>
 				<div id="plot-container">

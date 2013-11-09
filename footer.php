@@ -1,3 +1,12 @@
+<footer>
+	<div class="row">
+		<div id="footer" class="small-12 columns">
+			<p>&copy; 2013 Team &frac14; Brown @ Y-Hacks. Go UMD!</p>
+		</div>
+	</div>
+
+</footer>
+
 <script src="js/foundation.min.js"></script>
 <script>
 	$(document).foundation();
@@ -6,46 +15,36 @@
 		$('#login').click(function() {
 			$.ajax({
 				type: "POST",
-				url: '/php/login.php',
-				data: "url=" + window.location,
+				url: 'php/login.php',
+				data: "username=admin",
 				success: function(data) {
 					data = $.parseJSON(data);
 					
 					if(data.hasOwnProperty("success")) {
-						$('.login-button').show();
-						$('#logged-on-menu').hide();
-						displayAlertBar('success', 'You have successfully logged out!');
-						
-						if(window.location.href.indexOf('profile') != -1)
-							window.location = "http://mere.im";
+						window.location = window.location;
 					}
 				}
 			});
 		});
 		$('#logout').click(function() {
 			$.ajax({
-				type: "POST",
-				url: '/php/logout.php',
-				data: "url=" + window.location,
+				type: "GET",
+				url: 'php/logout.php',
 				success: function(data) {
 					data = $.parseJSON(data);
 					
 					if(data.hasOwnProperty("success")) {
-						$('.login-button').show();
-						$('#logged-on-menu').hide();
-						displayAlertBar('success', 'You have successfully logged out!');
-						
-						if(window.location.href.indexOf('profile') != -1)
-							window.location = "http://mere.im";
+						window.location = window.location;
 					}
 				}
 			});
 		});
+		
+		$('.movie-textbox').on('keydown keypress', function() {
+			
+		});
 	});
 </script>
 </body>
-<footer>
-
-</footer>
 
 </html>
