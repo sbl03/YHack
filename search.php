@@ -4,8 +4,10 @@ include "synopsis.php";
 $name = $_REQUEST["name"];
 
 $json = file_get_contents('http://www.omdbapi.com/?s=' . urlencode($name));
-$obj = json_decode($json);
-print_r ($obj);
+$obj = get_object_vars(json_decode($json));
+$obj = $obj['Search'];
+
+print_r($obj);
 ?>
 
 <div class="row full">

@@ -1,36 +1,55 @@
-<?php include "header.php" ?>
+<?php include "header.php";
+$id = $_REQUEST["id"];
+
+//Get the movie name based on the synopsis ID
+
+//$name = ???
+
+$json = file_get_contents('http://www.omdbapi.com/?t=' . urlencode($name));
+$obj = get_object_vars(json_decode($json));
+?>
 
 <div class="row full">
 	<div class="fit-to-container">
 		<div class="small-12 columns">
 			<div id="movie-hero-unit">
-				<table>
+				<table id="movie-info">
 					<tr>
-						<td><img src="" /></td>
-						<td>
-							<h1>Finding Nemo</h1>
+						<td><img src="<?php echo $obj['Poster'] ?>" /></td>
+						<td class="full">
+							<h1><?php echo $name ?></h1>
+							<h3>Synopsis by some_username</h3>
 							<table>
 								<tr>
-									<td>Year</td>
-									<td>2004</td>
+									<td>Rated</td>
+									<td><?php echo $obj['Rated'] ?></td>
 								</tr>
 								<tr>
-									<td>Year</td>
-									<td>2004</td>
+									<td>Released</td>
+									<td><?php echo $obj['Released'] ?></td>
 								</tr>
 								<tr>
-									<td>Year</td>
-									<td>2004</td>
+									<td>Runtime</td>
+									<td><?php echo $obj['Runtime'] ?></td>
 								</tr>
 								<tr>
-									<td>Year</td>
-									<td>2004</td>
+									<td>Genre</td>
+									<td><?php echo $obj['Genre'] ?></td>
 								</tr>
 								<tr>
-									<td>Year</td>
-									<td>2004</td>
+									<td>Actors</td>
+									<td><?php echo $obj['Actors'] ?></td>
+								</tr>
+								<tr>
+									<td>Brief Plot</td>
+									<td><?php echo $obj['Plot'] ?></td>
+								</tr>
+								<tr>
+									<td>IMDB Rating</td>
+									<td><?php echo $obj['imdbRating'] ?> / 10</td>
 								</tr>
 							</table>
+							<p><a href="http://www.imdb.com/title/<?php echo $obj['imdbID'] ?>">View on IMDB</a></p>
 						</td>
 					</tr>
 				</table>
@@ -42,5 +61,11 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	
+});
+</script>
 
 <?php include "footer.php" ?>

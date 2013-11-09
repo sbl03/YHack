@@ -97,6 +97,13 @@ h3 {
 		}
 		
 /* SYNOPSIS PAGE */
+#movie-info {
+	width: 100%;
+	border: none;
+}
+	#movie-info td {
+		vertical-align: top;	
+	}
 
 /* INPUT PAGE */
 #plot-container {
