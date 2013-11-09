@@ -39,7 +39,8 @@
                         $q = $conn->prepare($get);
                         $q->execute();
                         $ids = $q->fetchAll();
-                        $i = array_shift(array_shift($ids));
+						$temp = array_shift($ids);
+                        $i = array_shift($temp);
                         foreach($e as $key => $value){
                             $ent = "INSERT INTO ".Synopsis::$tbname2." (ID, Time, Text) VALUES ($i, $key, '$value')";
                             $y = $conn->prepare($ent);
@@ -52,36 +53,52 @@
 		public static function retreive($i){
 		
 			$conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
-                        $insert = "SELECT * FROM ".Synopsis::$tbname." WHERE ID = ".$i;
-                        $x = $conn->prepare($insert);
-                        $x->execute();
-                        $data = $x -> fetchAll();
-                        
-                        $data = array_shift($data);
-                        $i = $data[0];
-                        $n = $data[1];
-                        $a = $data[2];
-                        $u = $data[3];
-                        $d = $data[4];
-                        
-                        $insert = "SELECT * FROM ".Synopsis::$tbname2." WHERE ID = ".$i;
-                        $x = $conn->prepare($insert);
-                        $x->execute();
-                        $eData = $x -> fetchAll();
-                        $eT = array();
-                        $e = array();
-                        
-                        foreach ($eData as $key => $value){
-                            
-                            array_unshift($eT, $value[1]);
-                            $e[$value[1]] = $value[2];
-                        }// foreach
-                        
-                        array_values($eT);
-                        
+			$insert = "SELECT * FROM ".Synopsis::$tbname." WHERE ID = ".$i;
+			$x = $conn->prepare($insert);
+			$x->execute();
+			$data = $x -> fetchAll();
+			
+			$data = array_shift($data);
+			$i = $data[0];
+			$n = $data[1];
+			$a = $data[2];
+			$u = $data[3];
+			$d = $data[4];
+			
+			$insert = "SELECT * FROM ".Synopsis::$tbname2." WHERE ID = ".$i;
+			$x = $conn->prepare($insert);
+			$x->execute();
+			$eData = $x -> fetchAll();
+			$eT = array();
+			$e = array();
+			
+			foreach ($eData as $key => $value){
+				
+				array_unshift($eT, $value[1]);
+				$e[$value[1]] = $value[2];
+			}// foreach
+			
+			array_values($eT);
+			
 			return new Synopsis($i, $n, $a, $u, $d, $eT, $e);
 		}// retrieve
 		
+		// returns a list of synopsii with the name passed in
+		public static function search($name){
+			
+			$conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
+			$insert = "SELECT ID FROM ".Synopsis::$tbname." WHERE UCASE(MovieName) = UCASE('$name')";
+            $x = $conn->prepare($insert);
+            $x->execute();
+            $data = $x -> fetchAll();
+			$toReturn = array();
+			foreach($data as $key => $value){
+				
+				array_push($toReturn, Synopsis::retreive($value[0]));
+			}// foreach
+			
+			return $toReturn;
+		}// search
 		// returns synopsis id
 		public function getID() {
 			
@@ -166,13 +183,16 @@
 		}// removeEntry
 	}// class Synopsis
 	
-	$entryT = array(1, 15, 52);
-	$entries = array(1 => "test", 15 => "Hello", 52 => "the thing");
-	$test = Synopsis::createNew("test", "Wasson", $entryT, $entries);
-        $test -> addUpvote();
-        $test -> addDownvote();
-        $test2 = Synopsis::retreive(50);
-        print_r($test2 -> getEntries());
-        
+	// $entryT = array(1, 15, 52);
+	// $entries = array(1 => "test", 15 => "Hello", 52 => "the thing");
+	// $test = Synopsis::createNew("Finding Nemo", "Ram", $entryT, $entries);
+        // $test -> addUpvote();
+		// $test -> addDownvote();
+		// $test -> addDownvote();
+		// $test -> addDownvote();
+		// $test -> addDownvote();
+		// $test -> addDownvote();
+		// $test -> addUpvote();
+        // $test -> addDownvote();
 ?>
 </html>

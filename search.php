@@ -16,22 +16,32 @@
 					<span class="movie-title">Finding Nemo</span>
 				</div>
 			</div>
+			
 			<div id="results-container">
 				<h2>All Results for <span id="query">Finding Nemo</span></h2>
 				<div class="result">
 					<table class="result-table">
-						<tr>
-							<td>
-								<div class="upvote">▲</div>
-								<div class="downvote">▼</div>
-							</td>
-							<td>
-								<div class="rating">123</div>
-							</td>
-							<td>
-								<h3>Movie Title</h3> by Author Name
-							</td>
-						</tr>
+						<?php
+							include "synopsis.php";
+				
+							$name = $_REQUEST["name"];
+							$synopsii = Synopsis::search($name);
+							foreach ($synopsii as $key => $value){
+				
+								echo "<tr>
+									<td>
+										<div class=\"upvote\">▲</div>
+										<div class=\"downvote\">▼</div>
+									</td>
+									<td>
+										<div class=\"rating\">".($value -> getUpvotes() - $value -> getDownvotes())."</div>
+									</td>
+									<td>
+										<h3>".$value -> getName()."</h3> by ".$value -> getAuthor()."
+									</td>
+							</tr>";					
+							}// foreach
+						?>
 					</table>
 				</div>
 			</div>
