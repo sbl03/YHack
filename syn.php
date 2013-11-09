@@ -1,9 +1,14 @@
 <?php include "header.php";
+include "synopsis.php";
 $id = $_REQUEST["id"];
 
 //Get the movie name based on the synopsis ID
 
-//$name = ???
+$obj = Synopsis::retreive($id);
+$name = $obj->getName();
+$synopsis = $obj->getEntries();
+
+echo '<script>var synopsis = ???</script>';
 
 $json = file_get_contents('http://www.omdbapi.com/?t=' . urlencode($name));
 $obj = get_object_vars(json_decode($json));

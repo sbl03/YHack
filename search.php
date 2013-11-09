@@ -7,7 +7,6 @@ $json = file_get_contents('http://www.omdbapi.com/?s=' . urlencode($name));
 $obj = get_object_vars(json_decode($json));
 $obj = $obj['Search'];
 
-print_r($obj);
 ?>
 
 <div class="row full">

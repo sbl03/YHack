@@ -121,6 +121,9 @@ h3 {
 		background-color: #f3f3f3;
 		padding-top: 14px;
 	}
+	#syn-form .submit-synopsis {
+		float: right;	
+	}
 	
 /* FOOTER */
 #footer {

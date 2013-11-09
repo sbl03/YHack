@@ -42,7 +42,8 @@
 					</div>
 					<div class="row add-row">
 						<div class="small-12 columns text-center">
-							<a class="small button add-entry">Add Another</a>
+							<a class="small button add-entry">+ Add Another</a>
+							<a class="small button submit-synopsis">Submit</a>
 						</div>
 					</div>
 				</div>
@@ -67,6 +68,12 @@ $(document).ready(function() {
 		$(this).parents('.add-row').prev().children('.plot-time').trigger('click');
 		
 		counter++;
+	});
+	
+	$('.submit-synopsis').click(function(e) {
+		e.preventDefault();
+		
+		$('#syn-form').submit();
 	});
 });
 </script>
