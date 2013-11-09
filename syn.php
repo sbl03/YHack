@@ -11,8 +11,6 @@ $json = file_get_contents('http://www.omdbapi.com/?t=' . urlencode($name));
 $obj = get_object_vars(json_decode($json));
 ?>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
-
 <div class="row full">
 	<div class="fit-to-container">
 		<div class="small-12 columns">

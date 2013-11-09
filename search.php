@@ -88,20 +88,29 @@ $(document).ready(function() {
 	});
 	
 	$('.upvotes').click(function() {
-		var id = $(this).parents('tr').attr('data-id');
+		var parent = $(this).parents('tr');
 		
 		$.ajax({
 			type: "POST",
 			url: "php/update-vote.php",
-			data: "vote=up&id=" + id,
+			data: "vote=up&id=" + $(parent).attr('data-id'),
 			success: function(data) {
-				
+				$(parent).find('.rating').html(data);
 			}
 		});
 	});
 	
 	$('.downvotes').click(function() {
+		var parent = $(this).parents('tr');
 		
+		$.ajax({
+			type: "POST",
+			url: "php/update-vote.php",
+			data: "vote=down&id=" + $(parent).attr('data-id'),
+			success: function(data) {
+				$(parent).find('.rating').html(data);
+			}
+		});
 	});
 });
 </script>
