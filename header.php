@@ -15,7 +15,7 @@ session_start();
 	<link rel="stylesheet" href="css/foundation.css">
 	<link rel="stylesheet" href="css/main.css">
 	
-	<script src="js/vender/jquery.js"></script>
+	<script src="js/vendor/jquery.js"></script>
 	<script src="js/vendor/custom.modernizr.js"></script>
 
 </head>
@@ -30,7 +30,13 @@ session_start();
 	
 	<section class="top-bar-section">
 		<ul class="right">
-			<li><a href="#">Submit Synopsis</a></li>
+			<?php if(isset($_SESSION['user'])) { ?>
+				<li><a href="#">Submit Synopsis</a></li>
+				<li><a id="logout" class="small button">Logout</a></li>
+			<?php } ?>
+			<?php if(!isset($_SESSION['user'])) { ?>
+				<li><a id="login" class="small button">Login</a></li>
+			<?php } ?>
 		</ul>
 	</section>
 </nav>

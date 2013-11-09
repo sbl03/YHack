@@ -38,7 +38,7 @@
 							<textarea class="plot-summary" rows="4"></textarea>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row add-row">
 						<div class="small-12 columns text-center">
 							<a class="small button add-entry">Add Another</a>
 						</div>
@@ -48,5 +48,23 @@
 		</div>
 	</div>
 </div>
+
+<script>
+var entry = '<div class="row">' +
+	'<div class="small-3 columns">' +
+		'<input class="plot-time" type="text" placeholder="HH:MM:SS" />' +
+	'</div>' +
+	'<div class="small-9 columns">' +
+		'<textarea class="plot-summary" rows="4"></textarea>' +
+	'</div>' +
+'</div>';
+
+$(document).ready(function() {
+	$('.add-entry').click(function() {
+		$(this).parents('.add-row').before(entry);
+		$(this).parents('.add-row').prev().children('.plot-time').trigger('click');
+	});
+});
+</script>
 
 <?php include "footer.php" ?>
