@@ -64,7 +64,7 @@ $obj = get_object_vars(json_decode($json));
 						<script>					
 							var synCounter = 0;
 							var time = 0;
-							var isGoing = 1;
+							var isGoing = 0;
 					';
 							
 							$et = $syn -> getETimes();
@@ -80,13 +80,13 @@ $obj = get_object_vars(json_decode($json));
 					echo '		
 							var test = setInterval(function(){
 								time += isGoing;
+								console.log(isGoing);
+								
 								if (time == entries[synCounter][0]){
 								
 									var hours = Math.floor(time / 3600);
 									var min = Math.floor((time % 3600) / 60);
 									var sec = time % 60;
-									
-									console.log(hours);
 									
 									$( "#plot-info" ).append("<div class=\"plot_time\">" + hours + ":" + min + ":" + sec + "</div>");
 									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>");
@@ -97,9 +97,24 @@ $obj = get_object_vars(json_decode($json));
 										window.clearInterval(test);
 								}//if
 							}, 1000);
+							
+							//pauses the timer
+							function pause(){
+								
+								isGoing = 0;
+							}//pause
+							
+							//resumes the timer
+							function resume(){
+							
+								isGoing = 1;
+							}//resume
 						</script>
 					';
 				?>
+				
+				<button onclick="resume()">Play</button>
+				<button onclick="pause()">Pause</button>
 			</div>
 		</div>
 	</div>
