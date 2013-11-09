@@ -63,7 +63,7 @@ hr {
 	background-size: cover;
 	background-position: center center;	
 }
-#about-container {
+.orange {
 	background-color: #FC0;
 	padding-top: 30px;	
 	padding-bottom: 30px;
@@ -97,6 +97,11 @@ hr {
 	}
 
 /* SEARCH RESULTS PAGE */
+.small-hero {
+	background-image: url(../img/hero.jpg);
+	background-size: cover;
+	background-position: center center;	
+}
 #top-search {
 	margin-top: 30px;
 }

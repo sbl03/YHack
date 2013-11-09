@@ -27,42 +27,47 @@ foreach($obj as $o) {
 }
 ?>
 
-<div class="row full">
-	<div class="fit-to-container">
-		<div class="small-12 columns">
-			<div id="top-search">
-				<input type="text" class="movie-textbox" placeholder="Search again" />
-				<a id="search-button" class="small button">Submit</a>
-			</div>
-			<div id="suggested-movies">
-				<h2>Suggested Movies</h2>
-				<?php echo $toAdd ?>
-			</div>
+<div class="row full small-hero">
+	<div class="small-12 columns">
+		<div id="top-search">
+			<input type="text" class="movie-textbox" placeholder="Search again" />
+			<a id="search-button" class="small button">Submit</a>
+		</div>
+	</div>
+</div>
+<div class="row full orange">
+	<div class="small-12 columns">
+		<div id="suggested-movies">
+			<h2>Suggested Movies</h2>
+			<?php echo $toAdd ?>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="small-12 columns">			
+		<div id="results-container">
+			<h2>All Results for <span id="query"><?php echo $name ?></span></h2>
+			<div class="result">
+				<table class="result-table">
+					<?php				
+						$synopsii = Synopsis::search($name);
+						foreach ($synopsii as $key => $value){
 			
-			<div id="results-container">
-				<h2>All Results for <span id="query"><?php echo $name ?></span></h2>
-				<div class="result">
-					<table class="result-table">
-						<?php				
-							$synopsii = Synopsis::search($name);
-							foreach ($synopsii as $key => $value){
-				
-								echo "<tr data-id=\"".($value -> getID())."\">
-									<td>
-										<div class=\"upvote\">▲</div>
-										<div class=\"downvote\">▼</div>
-									</td>
-									<td>
-										<div class=\"rating\">".($value -> getUpvotes() - $value -> getDownvotes())."</div>
-									</td>
-									<td>
-										<h3>".$value -> getName()."</h3> by ".$value -> getAuthor()."
-									</td>
-							</tr>";					
-							}// foreach
-						?>
-					</table>
-				</div>
+							echo "<tr data-id=\"".($value -> getID())."\">
+								<td>
+									<div class=\"upvote\">▲</div>
+									<div class=\"downvote\">▼</div>
+								</td>
+								<td>
+									<div class=\"rating\">".($value -> getUpvotes() - $value -> getDownvotes())."</div>
+								</td>
+								<td>
+									<h3>".$value -> getName()."</h3> by ".$value -> getAuthor()."
+								</td>
+						</tr>";					
+						}// foreach
+					?>
+				</table>
 			</div>
 		</div>
 	</div>

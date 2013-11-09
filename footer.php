@@ -40,10 +40,6 @@
 			});
 		});
 		
-		$('.movie-textbox').on('keydown keypress', function() {
-			
-		});
-		
 		$(function(){
 			$(".movie-textbox").focus(); //Focus on search field
 			$(".movie-textbox").autocomplete({
