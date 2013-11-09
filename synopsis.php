@@ -81,7 +81,7 @@
 			
 			foreach ($eData as $key => $value){
 				
-				array_unshift($eT, $value[1]);
+				array_push($eT, $value[1]);
 				$e[$value[1]] = $value[2];
 			}// foreach
 			
@@ -142,12 +142,18 @@
 			return $this -> downvotes;
 		}// getDownvotes
 		
-                // returns the entries list
-                public function getEntries(){
-                    
-                    return $this -> entries;
-                }// getEntries
-            
+		// returns the entries list
+		public function getEntries(){
+			
+			return $this -> entries;
+		}// getEntries
+	
+		// returns the entry times
+		public function getETimes(){
+		
+			return $this -> entryTimes;
+		}// getETimes
+	
 		// adds an upvote 
 		public function addUpvote() {
 		

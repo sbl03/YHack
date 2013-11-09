@@ -4,15 +4,14 @@ $id = $_REQUEST["id"];
 
 //Get the movie name based on the synopsis ID
 
-$obj = Synopsis::retreive($id);
-$name = $obj->getName();
-$synopsis = $obj->getEntries();
-
-echo '<script>var synopsis = ???</script>';
+$syn = Synopsis::retreive($id);
+$name = $syn->getName();
 
 $json = file_get_contents('http://www.omdbapi.com/?t=' . urlencode($name));
 $obj = get_object_vars(json_decode($json));
 ?>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script> 
 
 <div class="row full">
 	<div class="fit-to-container">
@@ -23,7 +22,7 @@ $obj = get_object_vars(json_decode($json));
 						<td><img src="<?php echo $obj['Poster'] ?>" /></td>
 						<td class="full">
 							<h1><?php echo $name ?></h1>
-							<h3>Synopsis by some_username</h3>
+							<h3><?php echo "Synopsis by: ".$syn -> getAuthor(); ?></h3>
 							<table>
 								<tr>
 									<td>Rated</td>
@@ -60,17 +59,79 @@ $obj = get_object_vars(json_decode($json));
 				</table>
 			</div>
 			<div id="plot-info">
-				<div class="plot-time">2:34</div>
-				<p>There is going to be some text here</p>
+				
+				<?php
+				
+					echo '
+						<script>					
+							var synCounter = 0;
+							var time = 0;
+							var isGoing = 1;
+					';
+							
+							$et = $syn -> getETimes();
+							$e = $syn -> getEntries();
+							
+							echo "var entries = new Array();";
+							
+							foreach ($et as $key => $value){
+							
+								echo "entries[".$key."] = [".$value.", \"".$e[$value]."\"];";
+							}// foreach
+							
+					echo '		
+							var test = setInterval(function(){
+								time += isGoing;
+								if (time == entries[synCounter][0]){
+								
+									var hours = Math.floor(time / 3600);
+									var min = Math.floor((time % 3600) / 60);
+									var sec = time % 60;
+									
+									console.log(hours);
+									
+									$( "#plot-info" ).append("<div class=\"plot_time\">" + hours + ":" + min + ":" + sec + "</div>").hide().fadeIn();
+									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>").hide().fadeIn();
+									
+									synCounter++;
+									
+									if(synCounter >= entries.length)
+										window.clearInterval(test);
+								}//if
+							}, 1000);
+						</script>
+					';
+				?>
 			</div>
 		</div>
 	</div>
 </div>
 
-<script>
-$(document).ready(function() {
-	
-});
-</script>
+
 
 <?php include "footer.php" ?>
+
+
+
+// <script>
+	// //$(document).ready(function() {
+
+		// console.log("Working");
+		// var synCounter = 0;
+		// var time = 0;
+		// var isPaused = false;
+		 
+		// <?php
+		
+			// $et = $obj -> getETimes();
+			// $e = $obj -> getEntries();
+			
+			// echo "var entries = new Array();";
+			
+			// foreach ($et as $key => $value){
+			
+				// echo "entries[".$key."] = [".$value.", ".$e[$value]."];";
+			// }// foreach
+		// ?>
+	// //});
+// </script>
