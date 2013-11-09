@@ -54,21 +54,26 @@ h3 {
 	#hero-unit h1 {
 		color: #fff;	
 	}
-	#hero-unit form {
+	#hero-unit input,
+	#hero-unit #search-button {
+		font-size: 2em;
+		opacity: 0.3;
+		transition: opacity 0.25s ease-in-out;
 	}
-		#hero-unit form input {
-			width: 500px;
-			max-width: 100%;
-			font-size: 2em;
-			opacity: 0.2;
-			transition: opacity 0.25s ease-in-out;
+		#hero-unit input:hover,
+		#hero-unit input:focus,
+		#hero-unit #search-button:hover {
+			opacity: 1;
 		}
-		#hero-unit form input:hover {
-			opacity: 1;	
-		}
-		#hero-unit form * {
-			display: inline-block;	
-		}
+	#hero-unit #search-button {
+		opacity: 0.4;
+		line-height: 2em;
+		text-indent: -9999px;
+		background-image: url(../img/search.png);
+		background-repeat: no-repeat;
+		background-position: center center;
+		border: none !important;
+	}
 
 /* SEARCH RESULTS PAGE */
 #top-search {

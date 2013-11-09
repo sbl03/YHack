@@ -1,4 +1,12 @@
-<?php include "header.php" ?>
+<?php
+include "header.php";
+include "synopsis.php";
+$name = $_REQUEST["name"];
+
+$json = file_get_contents('http://www.omdbapi.com/?s=' . urlencode($name));
+$obj = json_decode($json);
+print_r ($obj);
+?>
 
 <div class="row full">
 	<div class="fit-to-container">
@@ -18,13 +26,10 @@
 			</div>
 			
 			<div id="results-container">
-				<h2>All Results for <span id="query">Finding Nemo</span></h2>
+				<h2>All Results for <span id="query"><?php echo $name ?></span></h2>
 				<div class="result">
 					<table class="result-table">
-						<?php
-							include "synopsis.php";
-				
-							$name = $_REQUEST["name"];
+						<?php				
 							$synopsii = Synopsis::search($name);
 							foreach ($synopsii as $key => $value){
 				
@@ -48,5 +53,13 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$(document).ready(function() {
+	$.getJSON("http://www.omdbapi.com/?s=Finding+Nemo", function( data ) {
+		console.log(data.Search[0].Title);
+	});
+});
+</script>
 
 <?php include "footer.php" ?>

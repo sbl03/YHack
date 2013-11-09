@@ -19,7 +19,7 @@
 							<label class="right inline" for="movie-start"><span data-tooltip class="has-tip" title="Enter the time the movie starts so we know how much to offset your timestamps">Movie Start Time</span></label>
 						</div>
 						<div class="small-9 columns">
-							<input id="movie-start" type="text" name="movie-title" placeholder="MM:SS" />
+							<input id="movie-start" type="text" name="movie-start" placeholder="MM:SS" />
 						</div>
 					</div>
 				</div>
