@@ -35,6 +35,18 @@ h3 {
 	-o-border-radius: 5px !important;
 	-webkit-border-radius: 5px !important;
 }
+.ui-helper-hidden-accessible {
+	display: none;	
+}
+.ui-autocomplete {
+	list-style: none;	
+}
+	.ui-autocomplete li {
+		
+	}
+		.ui-autocomplete li a {
+			color: #fff;	
+		}
 
 /* MAIN PAGE */
 #hero-container {
@@ -77,16 +89,29 @@ h3 {
 
 /* SEARCH RESULTS PAGE */
 #top-search {
+	margin-top: 30px;
+}
+	#top-search > * {
+		display: inline-block;	
+	}
+	#top-search input {
+		width: 500px;
+		max-width: 100%;	
+	}
+	#top-search #search-button {
+		width: auto;	
+	}
+	
+#suggested-movies {
 	
 }
-	#top-search form { }
-		#top-search form * {
-			display: inline-block;	
-		}
-		#top-search input {
-			width: 500px;
-			max-width: 100%;	
-		}
+	#suggested-movies > div {
+		display: inline-block;
+	}
+	#suggested-movies .movie-block {
+		width: 20%;	
+		padding: 20px;
+	}
 		
 .result {}
 	.result .result-table {

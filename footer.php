@@ -43,6 +43,28 @@
 		$('.movie-textbox').on('keydown keypress', function() {
 			
 		});
+		
+		$(function(){
+			$(".movie-textbox").focus(); //Focus on search field
+			$(".movie-textbox").autocomplete({
+				minLength: 0,
+				delay:5,
+				source: "php/suggest.php",
+				focus: function( event, ui ) {
+					$(this).val( ui.item.value );
+					return false;
+				},
+				select: function( event, ui ) {
+					$(this).val( ui.item.value );
+					return false;
+				}
+			}).data("uiAutocomplete")._renderItem = function( ul, item ) {
+				return $("<li></li>")
+					.data( "item.autocomplete", item )
+					.append( "<a>" + "<span class='imdbTitle'>" + item.label + "</span>" + "<div class='clear'></div></a>" )
+					.appendTo( ul );
+			};
+		});
 	});
 </script>
 </body>
