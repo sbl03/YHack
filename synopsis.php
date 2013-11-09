@@ -158,11 +158,10 @@
 		public function addUpvote() {
 		
 			$this -> upvotes ++;
-                        $conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
-                        $insert = "UPDATE ".Synopsis::$tbname." SET Upvotes = ".$this -> upvotes." WHERE ID = ".$this -> id;
-                        $x = $conn->prepare($insert);
-                        $x->execute();
-                        
+			$conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
+			$insert = "UPDATE ".Synopsis::$tbname." SET Upvotes = ".$this -> upvotes." WHERE ID = ".$this -> id;
+			$x = $conn->prepare($insert);
+			$x->execute();
 			return $this -> upvotes;
 		} //addUpvote
 		
@@ -170,12 +169,26 @@
 		public function addDownvote() {
 		
 			$this -> downvotes ++;
-                        $conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
-                        $insert = "UPDATE ".Synopsis::$tbname." SET Downvotes = ".$this -> downvotes." WHERE ID = ".$this -> id;
-                        $x = $conn->prepare($insert);
-                        $x->execute();
+			$conn = new PDO("mysql:host=".Synopsis::$dbhost.";dbname=".Synopsis::$dbname, Synopsis::$dbuser,"");
+			$insert = "UPDATE ".Synopsis::$tbname." SET Downvotes = ".$this -> downvotes." WHERE ID = ".$this -> id;
+			$x = $conn->prepare($insert);
+			$x->execute();
 			return $this -> downvotes;
-		}
+		}// addDownvote
+		
+		//static vertions of addUpvote/Downvote
+		public static function vote($id, $type){
+		
+			$syn = Synopsis::retreive($id);
+			
+			if ($type == 0){
+				$syn -> addUpvote();
+				}
+			else{			
+				$syn -> addDownvote();
+				}
+			return $syn -> getUpvotes() - $syn -> getDownvotes();
+		}// vote
 		
 		// adds an entry to the synopsis
 		function addEntry($val) { 
@@ -213,5 +226,8 @@
 		// $test -> addUpvote();
 		// $test -> addUpvote();
         // $test -> addDownvote();
+		
+	// Synopsis::vote(23, 0);
+	// Synopsis::vote(22, 1);
 ?>
 </html>
