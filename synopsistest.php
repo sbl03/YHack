@@ -1,3 +1,4 @@
+<html>
 <?php
 	class Synopsis {
 	
@@ -10,7 +11,7 @@
 		private $entries; // the entries
 		
 		// the constructor
-		public function __construct($i, $n, $a, $u, $d, $eTj, $e) {
+		private function __construct($i, $n, $a, $u, $d, $eT, $e) {
 			
 			$this -> id = $i;
 			$this -> name = $n;
@@ -18,8 +19,22 @@
 			$this -> upvotes = $u;
 			$this -> downvotes = $d;
 			$this -> entryTimes = $eT;
-			$this -> entries -> $e;
+			$this -> entries = $e;
 		}// __construct
+		
+		//returns a new synopsis
+		public static function createNew($n, $a, $u, $d, $eT, $e){
+		
+			$i = 0; //get new id Ram do ***(**************************
+			return new Synopsis($i, $n, $a, $u, $d, $eT, $e);
+		}// createNew
+		
+		//returns the synopsis with id $i
+		public static function retreive($i){
+		
+			$toReturn = 0;//retrieves and generates synopsis
+			return $toReturn;
+		}// retrieve
 		
 		// returns synopsis id
 		public function getID() {
@@ -55,14 +70,14 @@
 		public function addUpvote() {
 		
 			$this -> upvotes ++;
-			return $this -> upvotes
-
+			return $this -> upvotes;
 		} //addUpvote
 		
 		// add a downvote
 		public function addDownvote() {
 		
-			return ++($this -> downvotes);
+			$this -> downvotes ++;
+			return $this -> downvotes;
 		}
 		
 		// adds an entry to the synopsis
@@ -73,11 +88,11 @@
 		}// addEntry
 	
 		// removes and entry to the synopsis
-		function removeEntry $val) { 
+		function removeEntry ($val) { 
 			if(in_array($val[0],$entryTimes) == true) { 
 				foreach($entryTimes as $key=>$value){
 					
-					if $value == $val[0]) unset($array[$key]);
+					if($value == $val[0]) unset($array[$key]);
 				}// for each
 				
 				foreach($entries as $key => $value){
@@ -89,4 +104,10 @@
 			}// if
 		}// removeEntry
 	}// class Synopsis
+	
+	$entryT = array(1, 15, 52);
+	$entries = array(1 => "test", 15 => "Hello", 52 => "the thing");
+	$test = Synopsis::createNew("test", "Wasson", 0, 0, $entryT, $entries);
+	echo ($test -> getID());
 ?>
+</html>
