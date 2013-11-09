@@ -84,9 +84,9 @@ $obj = get_object_vars(json_decode($json));
 								
 								if (time == entries[synCounter][0]){
 								
-									var hours = Math.floor(time / 3600);
-									var min = Math.floor((time % 3600) / 60);
-									var sec = time % 60;
+									var hours = parseTime(Math.floor(time / 3600));
+									var min = parseTime(Math.floor((time % 3600) / 60));
+									var sec = parseTime(time % 60);
 									
 									$( "#plot-info" ).append("<div class=\"plot_time\">" + hours + ":" + min + ":" + sec + "</div>");
 									$( "#plot-info" ).append("<p>" + entries[synCounter][1] + "</p>");
@@ -118,16 +118,27 @@ $obj = get_object_vars(json_decode($json));
 </div>
 
 <div id="controls">
-	<button id="play" onclick="resume()">► Play</button>
-	<button id="pause" onclick="pause()"><strong>||</strong> Pause</button>
+	<button id="play" onclick="resume()">► <span class="timer"></span></button>
+	<button id="pause" onclick="pause()">|| <span class="timer"></span></button>
 </div>
 
 <script>
-	$(document).ready(function() {
-		$('#controls button').click(function() {
-			$('#controls button').toggle();
-		});
+function parseTime(time) {
+	if (time < 10)
+		return "0" + time;
+	else
+		return time;
+}
+
+$(document).ready(function() {
+	$('#controls button').click(function() {
+		$('#controls button').toggle();
 	});
+	
+	setInterval(function() {
+		$('.timer').text(parseTime(Math.floor((time % 3600) / 60)) + ":" + parseTime(time%60));
+	}, 1000);
+});
 </script>
 
 <?php include "footer.php" ?>
