@@ -11,7 +11,7 @@
 							<label class="right inline" for="movie-title">Movie Title</label>
 						</div>
 						<div class="small-9 columns">
-							<input id="movie-title" type="text" />
+							<input id="movie-title" type="text" name="movie-title" />
 						</div>
 					</div>
 					<div class="row">
@@ -19,7 +19,7 @@
 							<label class="right inline" for="movie-start"><span data-tooltip class="has-tip" title="Enter the time the movie starts so we know how much to offset your timestamps">Movie Start Time</span></label>
 						</div>
 						<div class="small-9 columns">
-							<input id="movie-start" type="text" placeholder="MM:SS" />
+							<input id="movie-start" type="text" name="movie-title" placeholder="MM:SS" />
 						</div>
 					</div>
 				</div>
@@ -34,10 +34,10 @@
 					</div>
 					<div class="row">
 						<div class="small-3 columns">
-							<input class="plot-time" type="text" placeholder="HH:MM:SS" />
+							<input class="plot-time" name="plot-time-1" type="text" placeholder="HH:MM:SS" />
 						</div>
 						<div class="small-9 columns">
-							<textarea class="plot-summary" rows="4"></textarea>
+							<textarea class="plot-summary" name="plot-summary-1" rows="4"></textarea>
 						</div>
 					</div>
 					<div class="row add-row">
@@ -52,19 +52,21 @@
 </div>
 
 <script>
-var entry = '<div class="row">' +
-	'<div class="small-3 columns">' +
-		'<input class="plot-time" type="text" placeholder="HH:MM:SS" />' +
-	'</div>' +
-	'<div class="small-9 columns">' +
-		'<textarea class="plot-summary" rows="4"></textarea>' +
-	'</div>' +
-'</div>';
+var counter = 2;
 
 $(document).ready(function() {
 	$('.add-entry').click(function() {
-		$(this).parents('.add-row').before(entry);
+		$(this).parents('.add-row').before('<div class="row">' +
+	'<div class="small-3 columns">' +
+		'<input class="plot-time" name="plot-time-'+ counter +'" type="text" placeholder="HH:MM:SS" />' +
+	'</div>' +
+	'<div class="small-9 columns">' +
+		'<textarea class="plot-summary" name="plot-summary-'+ counter +'" rows="4"></textarea>' +
+	'</div>' +
+'</div>');
 		$(this).parents('.add-row').prev().children('.plot-time').trigger('click');
+		
+		counter++;
 	});
 });
 </script>
